@@ -29,8 +29,9 @@ export class App {
         // https://stackoverflow.com/questions/26917424/angularjs-and-express-routing-404
         // https://stackoverflow.com/questions/26079611/node-js-typeerror-path-must-be-absolute-or-specify-root-to-res-sendfile-failed
         this.express.get('*', (request: Request, response: Response) => {
-            console.log(request.url);
-            console.log(pathStr);
+            // DEBUGGING:
+            // console.log(request.url);
+            // console.log(pathStr);
             response.sendFile('index.html', { root: pathStr });
         });
 
