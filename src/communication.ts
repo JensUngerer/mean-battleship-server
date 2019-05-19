@@ -11,6 +11,8 @@ export class Communication {
   constructor(private io: socketIo.Server) {}
 
   public emit(msg: IMessage) {
+    this.debugPrint(msg);
+
     msg.targetUserId = this.getTargetUser(msg.sourceUserId);
     // http://stackoverflow.com/questions/24041220/sending-message-to-a-specific-id-in-socket-io-1-0
     const targetSocketId: string = this.userIdSocketId[msg.targetUserId];
@@ -69,5 +71,9 @@ export class Communication {
       }
     }
     return this.NO_GAME_PARTNER_FOUND;
+  }
+
+  private debugPrint(msg: IMessage) {
+  	console.log(JSON.stringify(msg, null, 4));   
   }
 }

@@ -72,6 +72,7 @@ export class App {
             });
 
             socket.on(SocketIoSendTypes.StartGame, (userId: string) => {
+                this.debugPrint(userId);
                 this.socketIdUserId[userId] = userId;
                 this.communication.addUser(userId, socketId);
             });
@@ -91,10 +92,14 @@ export class App {
                 this.communication.emit(incomingMessage);
             });
 
-            socket.on(SocketIoSendTypes.GameWon, (incomingMessage: IMessage)=>{
+            socket.on(SocketIoSendTypes.GameWon, (incomingMessage: IMessage) => {
                 incomingMessage.type = SocketIoReceiveTypes.GameWon;
                 this.communication.emit(incomingMessage);
             });
         });
+    }
+
+    private debugPrint(data: any) {
+        console.log(JSON.stringify(data, null, 4));
     }
 }
