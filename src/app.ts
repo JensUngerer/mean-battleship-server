@@ -30,8 +30,10 @@ export class App {
         this.communication = new Communication(this.io);
     }
 
-    public configureProvidedDist(relativePath: string) {
-        const pathStr = path.resolve(relativePath);
+    public configureProvidedDist() {
+        const absolutePathToAppJs = process.argv[1];
+        const relativePathToAppJs: string = './../../client/dist/client';
+        const pathStr: string = path.resolve(absolutePathToAppJs, relativePathToAppJs);
 
         // DEBUGGING:
         console.log(pathStr);
