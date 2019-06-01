@@ -21,13 +21,13 @@ export class Communication {
 
   public addUser(userId: string, socketId: string) {
     this.userIdSocketId[userId] = socketId;
-    const foundGamePartner = this.searchMatchingGamePartner(userId);
-    if (foundGamePartner === this.NO_GAME_PARTNER_FOUND) {
+    const foundGamePartnerId = this.searchMatchingGamePartner(userId);
+    if (foundGamePartnerId === this.NO_GAME_PARTNER_FOUND) {
       this.usersMap[userId] = this.NO_MATCHING_GAME_PARTNER;
     } else {
       const beginningUserByGamble = this.gambleBeginningUser(
         userId,
-        foundGamePartner
+        foundGamePartnerId
       );
       const msg: IMessage = {
         type: SocketIoReceiveTypes.BeginningUser,
@@ -38,7 +38,7 @@ export class Communication {
     }
   }
 
-  public removeUser(userId: string, socketId?: string) {
+  public removeUser(userId: string) {
     const gamePartnerUserId = this.usersMap[userId];
     delete this.usersMap[userId];
     if (this.usersMap.hasOwnProperty(gamePartnerUserId)) {
@@ -60,13 +60,13 @@ export class Communication {
     return gamePartners[randomInt];
   }
 
-  private searchMatchingGamePartner(userId: string): string {
-    for (const user in this.usersMap) {
-      if (this.usersMap.hasOwnProperty(user)) {
-        if (this.usersMap[user] === this.NO_MATCHING_GAME_PARTNER) {
-          this.usersMap[user] = userId;
-          this.usersMap[userId] = user;
-          return user;
+  private searchMatchingGamePartner(incomingUserId: string): string {
+    for (const outGoingUserId in this.usersMap) {
+      if (this.usersMap.hasOwnProperty(outGoingUserId)) {
+        if (this.usersMap[outGoingUserId] === this.NO_MATCHING_GAME_PARTNER) {
+          this.usersMap[outGoingUserId] = incomingUserId;
+          this.usersMap[incomingUserId] = outGoingUserId;
+          return outGoingUserId;
         }
       }
     }

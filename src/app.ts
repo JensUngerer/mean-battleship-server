@@ -69,7 +69,7 @@ export class App {
                 // DEBUGGING:
                 console.log('client disconnected on port:' + port);
 
-                this.communication.removeUser(this.socketIdUserId[socketId], socketId);
+                this.communication.removeUser(this.socketIdUserId[socketId]);
                 delete this.socketIdUserId[socketId];
             });
 
