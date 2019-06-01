@@ -73,8 +73,9 @@ export class App {
                 delete this.socketIdUserId[socketId];
             });
 
-            socket.on(SocketIoSendTypes.StartGame, (userId: string) => {
-                this.debugPrint(userId);
+            socket.on(SocketIoSendTypes.StartGame, (incomingMessage: IMessage) => {
+                this.debugPrintMessage(incomingMessage);
+                const userId: string = incomingMessage.sourceUserId;
                 this.socketIdUserId[userId] = userId;
                 this.communication.addUser(userId, socketId);
             });
