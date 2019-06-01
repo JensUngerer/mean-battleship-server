@@ -80,21 +80,25 @@ export class App {
             });
 
             socket.on(SocketIoSendTypes.Coordinates, (incomingMessage: ICoordinatesMessage) => {
+                this.debugPrintMessage(incomingMessage);
                 incomingMessage.type = SocketIoReceiveTypes.Coordinates;
                 this.communication.emit(incomingMessage);
             });
 
             socket.on(SocketIoSendTypes.TileState, (incomingMessage: ITileStateMessage) => {
+                this.debugPrintMessage(incomingMessage);
                 incomingMessage.type = SocketIoReceiveTypes.TileState;
                 this.communication.emit(incomingMessage);
             });
 
             socket.on(SocketIoSendTypes.RemainingTileState, (incomingMessage: ITileStateMessage) => {
+                this.debugPrintMessage(incomingMessage);
                 incomingMessage.type = SocketIoReceiveTypes.RemainingTileState;
                 this.communication.emit(incomingMessage);
             });
 
             socket.on(SocketIoSendTypes.GameWon, (incomingMessage: IMessage) => {
+                this.debugPrintMessage(incomingMessage);
                 incomingMessage.type = SocketIoReceiveTypes.GameWon;
                 this.communication.emit(incomingMessage);
             });
@@ -103,5 +107,10 @@ export class App {
 
     private debugPrint(data: any) {
         console.log(JSON.stringify(data, null, 4));
+    }
+
+    private debugPrintMessage(msg: IMessage) {
+        console.log('incoming-message');
+        console.log(JSON.stringify(msg, null, 4));
     }
 }

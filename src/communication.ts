@@ -74,6 +74,7 @@ export class Communication {
   }
 
   private debugPrint(msg: IMessage) {
+    console.log('outgoing-message:')
   	console.log(JSON.stringify(msg, null, 4));   
   }
 }
