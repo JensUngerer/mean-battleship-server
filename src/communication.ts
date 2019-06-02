@@ -11,7 +11,7 @@ export class Communication {
   constructor(private io: socketIo.Server) {}
 
   public emit(msg: IMessage) {
-    this.debugPrint(msg);
+    // this.debugPrint(msg);
 
     msg.targetUserId = this.getTargetUser(msg.sourceUserId);
     // http://stackoverflow.com/questions/24041220/sending-message-to-a-specific-id-in-socket-io-1-0
