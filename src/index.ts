@@ -1,9 +1,8 @@
 import { App } from './app';
-import { ConfigSocketIo } from '../../common/src/config/configSocketIo';
 
 const app = new App();
 app.configureExpress();
-app.listen(ConfigSocketIo.PORT);
+app.listen();
 
 const gracefulShutdown: (shutdownMsg: string) => void = (shutdownMsg: string) => {
     const shutdownPromise: Promise<boolean> = app.shutdown();
