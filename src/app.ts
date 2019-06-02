@@ -34,11 +34,13 @@ export class App {
 
     public configureExpress() {
         const absolutePathToAppJs = process.argv[1];
-        const relativePathToAppJs: string = './../../client/dist/client';
+        const relativePathToAppJs: string = './../../../client/dist/client';
         const pathStr: string = path.resolve(absolutePathToAppJs, relativePathToAppJs);
 
         // DEBUGGING:
-        console.log(pathStr);
+        // console.log(absolutePathToAppJs);
+        // console.log(relativePathToAppJs);
+        // console.log(pathStr);
 
         this.express.use(express.static(pathStr));
 
